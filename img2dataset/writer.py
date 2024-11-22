@@ -125,7 +125,7 @@ class WebDatasetSampleWriter:
             for k, v in meta.items():
                 if isinstance(v, np.ndarray):
                     meta[k] = v.tolist()
-            sample["json"] = json.dumps(meta, indent=4)
+            sample["json"] = json.dumps(meta, indent=4, ensure_ascii=False)
             self.tarwriter.write(sample)
         self.buffered_parquet_writer.write(meta)
 
@@ -276,16 +276,16 @@ class FilesSampleWriter:
             if self.save_caption:
                 caption = str(caption) if caption is not None else ""
                 caption_filename = f"{self.subfolder}/{key}.txt"
-                with self.fs.open(caption_filename, "w") as f:
+                with self.fs.open(caption_filename, "w", encoding="utf-8") as f:
                     f.write(str(caption))
 
             # some meta data may not be JSON serializable
             for k, v in meta.items():
                 if isinstance(v, np.ndarray):
                     meta[k] = v.tolist()
-            j = json.dumps(meta, indent=4)
+            j = json.dumps(meta, indent=4, ensure_ascii=False)
             meta_filename = f"{self.subfolder}/{key}.json"
-            with self.fs.open(meta_filename, "w") as f:
+            with self.fs.open(meta_filename, "w", encoding="utf-8") as f:
                 f.write(j)
         self.buffered_parquet_writer.write(meta)
 
