@@ -23,7 +23,7 @@ if __name__ == "__main__":
         long_description=long_description,
         long_description_content_type="text/markdown",
         entry_points={"console_scripts": ["img2dataset = img2dataset:main"]},
-        author="Romain Beaumont, modified by Jiaao Zhe",
+        author="Romain Beaumont, modified by Aozhe Jia",
         author_email="jiaaozhe1999@outlook.com",
         url="https://github.com/jiaaozhe/img2dataset",
         data_files=[(".", ["README.md"])],
